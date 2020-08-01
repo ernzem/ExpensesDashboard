@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using ExpensesDashboard.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,9 @@ namespace ExpensesDashboard
                 (Configuration.GetConnectionString("ExpensesDashboard")));
                 
             services.AddControllers();
+
+            // AutoMapper services.Allows to use in the code
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IExpensesDashRepo, SqlExpensesDashRepo>();
         }
