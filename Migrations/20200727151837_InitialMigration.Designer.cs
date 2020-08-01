@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExpensesDashboard.Migrations
 {
-    [DbContext(typeof(CommanderContext))]
+    [DbContext(typeof(ExpensesDashContext))]
     [Migration("20200727151837_InitialMigration")]
     partial class InitialMigration
     {

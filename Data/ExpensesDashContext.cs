@@ -3,13 +3,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExpensesDashboard.Data
 {
-    public class CommanderContext : DbContext
+    public class ExpensesDashContext : DbContext
     {
-        public CommanderContext(DbContextOptions<CommanderContext> opt) : base(opt)
+        public ExpensesDashContext(DbContextOptions<ExpensesDashContext> opt) : base(opt)
         {
 
         }
         
         public DbSet<Command> Expenses { get; set; }
+
     }
 }

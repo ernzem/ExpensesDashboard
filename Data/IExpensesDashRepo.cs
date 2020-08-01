@@ -5,7 +5,7 @@ namespace ExpensesDashboard.Data
 {
     public interface IExpensesDashRepo
     {
-        IEnumerable<Command> GetAppCommands();
+        IEnumerable<Command> GetAllCommands();
         Command GetCommandById(int id);
     }
 }

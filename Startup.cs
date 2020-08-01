@@ -28,11 +28,12 @@ namespace ExpensesDashboard
         public void ConfigureServices(IServiceCollection services)
         {
             // Use MySQL database
-            services.AddDbContext<CommanderContext>(opt => opt.UseSqlServer
+            services.AddDbContext<ExpensesDashContext>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("ExpensesDashboard")));
                 
             services.AddControllers();
-            services.AddScoped<IExpensesDashRepo, MockExpensesDashRepo>();
+
+            services.AddScoped<IExpensesDashRepo, SqlExpensesDashRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
