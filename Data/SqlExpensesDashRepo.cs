@@ -19,7 +19,7 @@ namespace ExpensesDashboard.Data
 
         public Command GetCommandById(int id)
         {
-            throw new System.NotImplementedException();
+            return _context.Expenses.FirstOrDefault(p => p.Id == id);
         }
     }
 }
