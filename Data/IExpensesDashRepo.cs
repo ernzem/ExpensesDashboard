@@ -4,8 +4,10 @@ using ExpensesDashboard.Models;
 namespace ExpensesDashboard.Data
 {
     public interface IExpensesDashRepo
-    {
-        IEnumerable<Command> GetAllCommands();
-        Command GetCommandById(int id);
+    {   
+        bool SaveChanges();
+        IEnumerable<Command> GetAllExpenses();
+        Command GetExpenseById(int id);
+        void CreateExpense(Command cmd);
     }
 }

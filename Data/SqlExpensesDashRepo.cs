@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExpensesDashboard.Models;
@@ -12,14 +13,30 @@ namespace ExpensesDashboard.Data
         {
             _context = context;   
         }
-        public IEnumerable<Command> GetAllCommands()
+
+        public void CreateExpense(Command cmd)
+        {
+            if(cmd == null)
+            {
+                throw new ArgumentNullException(nameof(cmd));
+            }
+
+            _context.Expenses.Add(cmd);
+        }
+
+        public IEnumerable<Command> GetAllExpenses()
         {
             return _context.Expenses.ToList();
         }
 
-        public Command GetCommandById(int id)
+        public Command GetExpenseById(int id)
         {
             return _context.Expenses.FirstOrDefault(p => p.Id == id);
+        }
+
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges() >= 0);
         }
     }
 }

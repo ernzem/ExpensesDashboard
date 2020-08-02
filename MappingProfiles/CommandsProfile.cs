@@ -9,7 +9,9 @@ namespace ExpensesDashboard.MappingProfiles
     {
         public CommandsProfile()
         {
+            // From source --> to target
             CreateMap<Command, CommandReadDto>();
+            CreateMap<CommandCreateDto, Command>();
         }
     }
 }

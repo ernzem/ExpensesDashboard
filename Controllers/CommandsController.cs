@@ -21,26 +21,38 @@ namespace ExpensesDashboard.Controllers
             _mapper = mapper;
         }
 
-        // private readonly MockExpensesDashRepo _repository = new MockExpensesDashRepo();
         //GET api/commands
         [HttpGet]
-        public ActionResult <IEnumerable<CommandReadDto>> GetAllCommands()
+        public ActionResult <IEnumerable<CommandReadDto>> GetAllExpenses()
         {
-            var commandItems = _repository.GetAllCommands();
+            var commandItems = _repository.GetAllExpenses();
 
             return Ok(_mapper.Map<IEnumerable<CommandReadDto>>(commandItems));             
         }
 
         //GET api/commands/{id}
-        [HttpGet("{id}")]        
-        public ActionResult <CommandReadDto> GetCommandById(int id)
+        [HttpGet("{id}", Name="GetExpenseById")]        
+        public ActionResult <CommandReadDto> GetExpenseById(int id)
         {
-            var commandItem = _repository.GetCommandById(id);
+            var commandItem = _repository.GetExpenseById(id);
             if (commandItem != null)
             {
                 return Ok(_mapper.Map<CommandReadDto>(commandItem));
             }
             return NotFound();
+        }
+
+        //POST api/commands
+        [HttpPost]
+        public ActionResult <CommandReadDto> CreateExpense(CommandCreateDto commandCreateDto)
+        {
+            var commandModel = _mapper.Map<Command>(commandCreateDto);
+            _repository.CreateExpense(commandModel);
+            _repository.SaveChanges();
+
+            var commandReadDto = _mapper.Map<CommandReadDto>(commandModel);
+
+            return CreatedAtRoute(nameof(GetExpenseById), new {Id = commandReadDto.Id}, commandReadDto);
         }
     }
 }
