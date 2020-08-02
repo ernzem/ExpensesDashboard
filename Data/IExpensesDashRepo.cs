@@ -9,5 +9,6 @@ namespace ExpensesDashboard.Data
         IEnumerable<Command> GetAllExpenses();
         Command GetExpenseById(int id);
         void CreateExpense(Command cmd);
+        void UpdateExpense(Command cmd);
     }
 }

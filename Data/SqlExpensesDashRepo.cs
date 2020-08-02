@@ -38,5 +38,10 @@ namespace ExpensesDashboard.Data
         {
             return (_context.SaveChanges() >= 0);
         }
+
+        public void UpdateExpense(Command cmd)
+        {
+            // Nothing, because DbContext doesn't need update command
+        }
     }
 }

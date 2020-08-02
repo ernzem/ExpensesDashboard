@@ -51,8 +51,27 @@ namespace ExpensesDashboard.Controllers
             _repository.SaveChanges();
 
             var commandReadDto = _mapper.Map<CommandReadDto>(commandModel);
-
             return CreatedAtRoute(nameof(GetExpenseById), new {Id = commandReadDto.Id}, commandReadDto);
+        }
+
+        //PUT api/commands
+        [HttpPut("{id}")]
+        public ActionResult UpdateExpense(int id, CommandUpdateDto commandUpdateDto)
+        {
+            var commandModelFromRepo = _repository.GetExpenseById(id);
+            if(commandModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(commandUpdateDto, commandModelFromRepo);
+
+            // It's not necessary to update due the way entity framework works.But its good practice to use it.
+            _repository.UpdateExpense(commandModelFromRepo);
+            _repository.SaveChanges();
+            return NoContent();
+
+
         }
     }
 }
