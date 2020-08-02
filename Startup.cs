@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 
 namespace ExpensesDashboard
 {
@@ -32,7 +33,9 @@ namespace ExpensesDashboard
             services.AddDbContext<ExpensesDashContext>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("ExpensesDashboard")));
                 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(s => {
+                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
             // AutoMapper services.Allows to use in the code
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

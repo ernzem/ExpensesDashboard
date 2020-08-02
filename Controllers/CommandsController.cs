@@ -4,6 +4,7 @@ using ExpensesDashboard.Data;
 using ExpensesDashboard.Models;
 using AutoMapper;
 using ExpensesDashboard.DataTransferObjects;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace ExpensesDashboard.Controllers
 {
@@ -72,6 +73,33 @@ namespace ExpensesDashboard.Controllers
             return NoContent();
 
 
+        }
+
+         //PATCH api/commands/{id}
+        [HttpPatch("{id}")]
+        public ActionResult ExpenseUpdate(int id, JsonPatchDocument<CommandUpdateDto> patchDoc)
+        {
+            var commandModelFromRepo = _repository.GetExpenseById(id);
+            if(commandModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var commandToPatch = _mapper.Map<CommandUpdateDto>(commandModelFromRepo);
+            patchDoc.ApplyTo(commandToPatch, ModelState);
+
+            if(!TryValidateModel(commandToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(commandToPatch, commandModelFromRepo);
+
+            _repository.UpdateExpense(commandModelFromRepo);
+
+            _repository.SaveChanges();
+
+            return NoContent();
         }
     }
 }
