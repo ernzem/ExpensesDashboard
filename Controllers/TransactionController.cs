@@ -48,10 +48,12 @@ namespace ExpensesDashboard.Controllers
         public ActionResult <ReadDto> CreateTransaction(CreateDto transactionCreateDto)
         {
             var transactionModel = _mapper.Map<Transaction>(transactionCreateDto);
+            
             _repository.CreateTransaction(transactionModel);
             _repository.SaveChanges();
 
             var transactionReadDto = _mapper.Map<ReadDto>(transactionModel);
+            
             return CreatedAtRoute(nameof(GetTransactionById), new {Id = transactionReadDto.Id}, transactionReadDto);
         }
 
@@ -69,7 +71,6 @@ namespace ExpensesDashboard.Controllers
 
             // It's not necessary to update due the way entity framework works.But its good practice to use it.
             _repository.UpdateTransaction(transactionModelFromRepo);
-
             _repository.SaveChanges();
 
             return NoContent();
@@ -96,7 +97,6 @@ namespace ExpensesDashboard.Controllers
             _mapper.Map(transactionToPatch, transactionModelFromRepo);
 
             _repository.UpdateTransaction(transactionModelFromRepo);
-
             _repository.SaveChanges();
 
             return NoContent();
@@ -111,6 +111,7 @@ namespace ExpensesDashboard.Controllers
             {
                 return NotFound();
             }
+
             _repository.DeleteTransaction(transactionModelFromRepo);
             _repository.SaveChanges();
 
