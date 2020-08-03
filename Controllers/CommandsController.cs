@@ -26,49 +26,49 @@ namespace ExpensesDashboard.Controllers
         [HttpGet]
         public ActionResult <IEnumerable<ReadDto>> GetAllTransactions()
         {
-            var commandItems = _repository.GetAllTransactions();
+            var transactionItems = _repository.GetAllTransactions();
 
-            return Ok(_mapper.Map<IEnumerable<ReadDto>>(commandItems));             
+            return Ok(_mapper.Map<IEnumerable<ReadDto>>(transactionItems));             
         }
 
         //GET api/transactions/{id}
         [HttpGet("{id}", Name="GetTransactionById")]        
         public ActionResult <ReadDto> GetTransactionById(int id)
         {
-            var commandItem = _repository.GetTransactionById(id);
-            if (commandItem != null)
+            var transactionItem = _repository.GetTransactionById(id);
+            if (transactionItem != null)
             {
-                return Ok(_mapper.Map<ReadDto>(commandItem));
+                return Ok(_mapper.Map<ReadDto>(transactionItem));
             }
             return NotFound();
         }
 
         //POST api/transactions
         [HttpPost]
-        public ActionResult <ReadDto> CreateTransaction(CreateDto commandCreateDto)
+        public ActionResult <ReadDto> CreateTransaction(CreateDto transactionCreateDto)
         {
-            var commandModel = _mapper.Map<Transaction>(commandCreateDto);
-            _repository.CreateTransaction(commandModel);
+            var transactionModel = _mapper.Map<Transaction>(transactionCreateDto);
+            _repository.CreateTransaction(transactionModel);
             _repository.SaveChanges();
 
-            var commandReadDto = _mapper.Map<ReadDto>(commandModel);
-            return CreatedAtRoute(nameof(GetTransactionById), new {Id = commandReadDto.Id}, commandReadDto);
+            var transactionReadDto = _mapper.Map<ReadDto>(transactionModel);
+            return CreatedAtRoute(nameof(GetTransactionById), new {Id = transactionReadDto.Id}, transactionReadDto);
         }
 
         //PUT api/transactions
         [HttpPut("{id}")]
-        public ActionResult UpdateTransaction(int id, UpdateDto commandUpdateDto)
+        public ActionResult UpdateTransaction(int id, UpdateDto transactionUpdateDto)
         {
-            var commandModelFromRepo = _repository.GetTransactionById(id);
-            if(commandModelFromRepo == null)
+            var transactionModelFromRepo = _repository.GetTransactionById(id);
+            if(transactionModelFromRepo == null)
             {
                 return NotFound();
             }
 
-            _mapper.Map(commandUpdateDto, commandModelFromRepo);
+            _mapper.Map(transactionUpdateDto, transactionModelFromRepo);
 
             // It's not necessary to update due the way entity framework works.But its good practice to use it.
-            _repository.UpdateTransaction(commandModelFromRepo);
+            _repository.UpdateTransaction(transactionModelFromRepo);
 
             _repository.SaveChanges();
 
@@ -79,23 +79,23 @@ namespace ExpensesDashboard.Controllers
         [HttpPatch("{id}")]
         public ActionResult TransactionUpdate(int id, JsonPatchDocument<UpdateDto> patchDoc) //Change to PatchTransaction
         {
-            var commandModelFromRepo = _repository.GetTransactionById(id);
-            if(commandModelFromRepo == null)
+            var transactionModelFromRepo = _repository.GetTransactionById(id);
+            if(transactionModelFromRepo == null)
             {
                 return NotFound();
             }
 
-            var commandToPatch = _mapper.Map<UpdateDto>(commandModelFromRepo);
-            patchDoc.ApplyTo(commandToPatch, ModelState);
+            var transactionToPatch = _mapper.Map<UpdateDto>(transactionModelFromRepo);
+            patchDoc.ApplyTo(transactionToPatch, ModelState);
 
-            if(!TryValidateModel(commandToPatch))
+            if(!TryValidateModel(transactionToPatch))
             {
                 return ValidationProblem(ModelState);
             }
 
-            _mapper.Map(commandToPatch, commandModelFromRepo);
+            _mapper.Map(transactionToPatch, transactionModelFromRepo);
 
-            _repository.UpdateTransaction(commandModelFromRepo);
+            _repository.UpdateTransaction(transactionModelFromRepo);
 
             _repository.SaveChanges();
 
@@ -106,12 +106,12 @@ namespace ExpensesDashboard.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteTransaction(int id)
         {
-            var commandModelFromRepo = _repository.GetTransactionById(id);
-            if(commandModelFromRepo == null)
+            var transactionModelFromRepo = _repository.GetTransactionById(id);
+            if(transactionModelFromRepo == null)
             {
                 return NotFound();
             }
-            _repository.DeleteTransaction(commandModelFromRepo);
+            _repository.DeleteTransaction(transactionModelFromRepo);
             _repository.SaveChanges();
 
             return NoContent();

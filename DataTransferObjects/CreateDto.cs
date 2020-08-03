@@ -5,10 +5,6 @@ namespace ExpensesDashboard.DataTransferObjects
 {
     public class CreateDto
     {
-        [Key]
-        [Required]
-        public int Id { get; set; }
-
         [Required]
         public DateTime Date { get; set; }
 
