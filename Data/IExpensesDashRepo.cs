@@ -10,5 +10,6 @@ namespace ExpensesDashboard.Data
         Command GetExpenseById(int id);
         void CreateExpense(Command cmd);
         void UpdateExpense(Command cmd);
+        void DeleteExpense(Command cmd);
     }
 }

@@ -24,6 +24,15 @@ namespace ExpensesDashboard.Data
             _context.Expenses.Add(cmd);
         }
 
+        public void DeleteExpense(Command cmd)
+        {
+            if(cmd == null)
+            {
+                throw new ArgumentNullException(nameof(cmd));
+            }
+            _context.Expenses.Remove(cmd);
+        }
+
         public IEnumerable<Command> GetAllExpenses()
         {
             return _context.Expenses.ToList();
