@@ -5,15 +5,15 @@ using ExpensesDashboard.Models;
 
 namespace ExpensesDashboard.MappingProfiles
 {
-    public class CommandsProfile : Profile
+    public class TransactionsProfile : Profile
     {
-        public CommandsProfile()
+        public TransactionsProfile()
         {
             // Automapper mapping schemas.From source --> to target
-            CreateMap<Command, CommandReadDto>();
-            CreateMap<CommandCreateDto, Command>();
-            CreateMap<CommandUpdateDto, Command>();
-            CreateMap<Command, CommandUpdateDto>();
+            CreateMap<Transaction, ReadDto>();
+            CreateMap<CreateDto, Transaction>();
+            CreateMap<UpdateDto, Transaction>();
+            CreateMap<Transaction, UpdateDto>();
         }
     }
 }

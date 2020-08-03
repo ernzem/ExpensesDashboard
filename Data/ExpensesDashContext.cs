@@ -10,7 +10,7 @@ namespace ExpensesDashboard.Data
 
         }
         
-        public DbSet<Command> Expenses { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
     }
 }
