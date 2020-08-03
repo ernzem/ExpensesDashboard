@@ -24,40 +24,40 @@ namespace ExpensesDashboard.Controllers
 
         //GET api/commands
         [HttpGet]
-        public ActionResult <IEnumerable<CommandReadDto>> GetAllExpenses()
+        public ActionResult <IEnumerable<ReadDto>> GetAllExpenses()
         {
             var commandItems = _repository.GetAllExpenses();
 
-            return Ok(_mapper.Map<IEnumerable<CommandReadDto>>(commandItems));             
+            return Ok(_mapper.Map<IEnumerable<ReadDto>>(commandItems));             
         }
 
         //GET api/commands/{id}
         [HttpGet("{id}", Name="GetExpenseById")]        
-        public ActionResult <CommandReadDto> GetExpenseById(int id)
+        public ActionResult <ReadDto> GetExpenseById(int id)
         {
             var commandItem = _repository.GetExpenseById(id);
             if (commandItem != null)
             {
-                return Ok(_mapper.Map<CommandReadDto>(commandItem));
+                return Ok(_mapper.Map<ReadDto>(commandItem));
             }
             return NotFound();
         }
 
         //POST api/commands
         [HttpPost]
-        public ActionResult <CommandReadDto> CreateExpense(CommandCreateDto commandCreateDto)
+        public ActionResult <ReadDto> CreateExpense(CreateDto commandCreateDto)
         {
             var commandModel = _mapper.Map<Transaction>(commandCreateDto);
             _repository.CreateExpense(commandModel);
             _repository.SaveChanges();
 
-            var commandReadDto = _mapper.Map<CommandReadDto>(commandModel);
+            var commandReadDto = _mapper.Map<ReadDto>(commandModel);
             return CreatedAtRoute(nameof(GetExpenseById), new {Id = commandReadDto.Id}, commandReadDto);
         }
 
         //PUT api/commands
         [HttpPut("{id}")]
-        public ActionResult UpdateExpense(int id, CommandUpdateDto commandUpdateDto)
+        public ActionResult UpdateExpense(int id, UpdateDto commandUpdateDto)
         {
             var commandModelFromRepo = _repository.GetExpenseById(id);
             if(commandModelFromRepo == null)
@@ -77,7 +77,7 @@ namespace ExpensesDashboard.Controllers
 
          //PATCH api/commands/{id}
         [HttpPatch("{id}")]
-        public ActionResult ExpenseUpdate(int id, JsonPatchDocument<CommandUpdateDto> patchDoc)
+        public ActionResult ExpenseUpdate(int id, JsonPatchDocument<UpdateDto> patchDoc)
         {
             var commandModelFromRepo = _repository.GetExpenseById(id);
             if(commandModelFromRepo == null)
@@ -85,7 +85,7 @@ namespace ExpensesDashboard.Controllers
                 return NotFound();
             }
 
-            var commandToPatch = _mapper.Map<CommandUpdateDto>(commandModelFromRepo);
+            var commandToPatch = _mapper.Map<UpdateDto>(commandModelFromRepo);
             patchDoc.ApplyTo(commandToPatch, ModelState);
 
             if(!TryValidateModel(commandToPatch))

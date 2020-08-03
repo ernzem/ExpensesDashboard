@@ -10,10 +10,10 @@ namespace ExpensesDashboard.MappingProfiles
         public CommandsProfile()
         {
             // Automapper mapping schemas.From source --> to target
-            CreateMap<Transaction, CommandReadDto>();
-            CreateMap<CommandCreateDto, Transaction>();
-            CreateMap<CommandUpdateDto, Transaction>();
-            CreateMap<Transaction, CommandUpdateDto>();
+            CreateMap<Transaction, ReadDto>();
+            CreateMap<CreateDto, Transaction>();
+            CreateMap<UpdateDto, Transaction>();
+            CreateMap<Transaction, UpdateDto>();
         }
     }
 }

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ExpensesDashboard.DataTransferObjects
 {
-    public class CommandReadDto
+    public class ReadDto
     {
         [Key]
         public int Id { get; set; }

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ExpensesDashboard.DataTransferObjects
 {
-    public class CommandUpdateDto
+    public class CreateDto
     {
         [Required] // required for "400 Bad Request" message.It's more informative & gives information to the client about missing data
         [MaxLength(250)]
