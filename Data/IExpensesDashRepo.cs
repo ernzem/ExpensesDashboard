@@ -6,10 +6,10 @@ namespace ExpensesDashboard.Data
     public interface IExpensesDashRepo
     {   
         bool SaveChanges();
-        IEnumerable<Command> GetAllExpenses();
-        Command GetExpenseById(int id);
-        void CreateExpense(Command cmd);
-        void UpdateExpense(Command cmd);
-        void DeleteExpense(Command cmd);
+        IEnumerable<Transaction> GetAllExpenses();
+        Transaction GetExpenseById(int id);
+        void CreateExpense(Transaction trn);
+        void UpdateExpense(Transaction trn);
+        void DeleteExpense(Transaction trn);
     }
 }

@@ -14,33 +14,33 @@ namespace ExpensesDashboard.Data
             _context = context;   
         }
 
-        public void CreateExpense(Command cmd)
+        public void CreateExpense(Transaction trn)
         {
-            if(cmd == null)
+            if(trn == null)
             {
-                throw new ArgumentNullException(nameof(cmd));
+                throw new ArgumentNullException(nameof(trn));
             }
 
-            _context.Expenses.Add(cmd);
+            _context.Transactions.Add(trn);
         }
 
-        public void DeleteExpense(Command cmd)
+        public void DeleteExpense(Transaction trn)
         {
-            if(cmd == null)
+            if(trn == null)
             {
-                throw new ArgumentNullException(nameof(cmd));
+                throw new ArgumentNullException(nameof(trn));
             }
-            _context.Expenses.Remove(cmd);
+            _context.Transactions.Remove(trn);
         }
 
-        public IEnumerable<Command> GetAllExpenses()
+        public IEnumerable<Transaction> GetAllExpenses()
         {
-            return _context.Expenses.ToList();
+            return _context.Transactions.ToList();
         }
 
-        public Command GetExpenseById(int id)
+        public Transaction GetExpenseById(int id)
         {
-            return _context.Expenses.FirstOrDefault(p => p.Id == id);
+            return _context.Transactions.FirstOrDefault(p => p.Id == id);
         }
 
         public bool SaveChanges()
@@ -48,7 +48,7 @@ namespace ExpensesDashboard.Data
             return (_context.SaveChanges() >= 0);
         }
 
-        public void UpdateExpense(Command cmd)
+        public void UpdateExpense(Transaction trn)
         {
             // Nothing, because DbContext doesn't need update command
         }

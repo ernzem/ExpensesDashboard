@@ -47,7 +47,7 @@ namespace ExpensesDashboard.Controllers
         [HttpPost]
         public ActionResult <CommandReadDto> CreateExpense(CommandCreateDto commandCreateDto)
         {
-            var commandModel = _mapper.Map<Command>(commandCreateDto);
+            var commandModel = _mapper.Map<Transaction>(commandCreateDto);
             _repository.CreateExpense(commandModel);
             _repository.SaveChanges();
 

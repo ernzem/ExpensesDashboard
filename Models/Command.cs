@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ExpensesDashboard.Models
 {
-    public class Command
+    public class Transaction
     {
         [Key]
         public int Id { get; set; }
