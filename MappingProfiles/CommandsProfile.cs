@@ -5,9 +5,9 @@ using ExpensesDashboard.Models;
 
 namespace ExpensesDashboard.MappingProfiles
 {
-    public class CommandsProfile : Profile
+    public class TransactionsProfile : Profile
     {
-        public CommandsProfile()
+        public TransactionsProfile()
         {
             // Automapper mapping schemas.From source --> to target
             CreateMap<Transaction, ReadDto>();

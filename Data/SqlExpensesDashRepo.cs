@@ -14,7 +14,7 @@ namespace ExpensesDashboard.Data
             _context = context;   
         }
 
-        public void CreateExpense(Transaction trn)
+        public void CreateTransaction(Transaction trn)
         {
             if(trn == null)
             {
@@ -24,7 +24,7 @@ namespace ExpensesDashboard.Data
             _context.Transactions.Add(trn);
         }
 
-        public void DeleteExpense(Transaction trn)
+        public void DeleteTransaction(Transaction trn)
         {
             if(trn == null)
             {
@@ -33,12 +33,12 @@ namespace ExpensesDashboard.Data
             _context.Transactions.Remove(trn);
         }
 
-        public IEnumerable<Transaction> GetAllExpenses()
+        public IEnumerable<Transaction> GetAllTransactions()
         {
             return _context.Transactions.ToList();
         }
 
-        public Transaction GetExpenseById(int id)
+        public Transaction GetTransactionById(int id)
         {
             return _context.Transactions.FirstOrDefault(p => p.Id == id);
         }
@@ -48,7 +48,7 @@ namespace ExpensesDashboard.Data
             return (_context.SaveChanges() >= 0);
         }
 
-        public void UpdateExpense(Transaction trn)
+        public void UpdateTransaction(Transaction trn)
         {
             // Nothing, because DbContext doesn't need update command
         }

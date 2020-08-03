@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpensesDashboard.Migrations
 {
     [DbContext(typeof(ExpensesDashContext))]
-    [Migration("20200801092028_V2")]
-    partial class V2
+    [Migration("20200803100616_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,7 +20,7 @@ namespace ExpensesDashboard.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ExpensesDashboard.Models.Command", b =>
+            modelBuilder.Entity("ExpensesDashboard.Models.Transaction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace ExpensesDashboard.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Commands");
+                    b.ToTable("Transactions");
                 });
 #pragma warning restore 612, 618
         }
