@@ -1,17 +1,21 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ExpensesDashboard.DataTransferObjects
 {
     public class UpdateDto
     {
-        [Required] // required for "400 Bad Request" message.It's more informative & gives information to the client about missing data
-        [MaxLength(250)]
-        public string HowTo { get; set; }
-        
-        [Required] // required for "400 Bad Request" message.It's more informative & gives information to the client about missing data
-        public string Line { get; set; } 
-        
-        [Required] // required for "400 Bad Request" message.It's more informative & gives information to the client about missing data
-        public string Platform { get;set; }    
+        [Key]
+        [Required]
+        public int Id { get; set; }
+
+        [Required]
+        public DateTime Date { get; set; }
+
+        [Required]
+        public decimal Sum { get; set; }
+
+        [Required]
+        public string Recipent { get; set; }   
     }
 }   

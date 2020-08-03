@@ -1,20 +1,29 @@
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExpensesDashboard.Models
 {
     public class Transaction
     {
         [Key]
+        [Required]
         public int Id { get; set; }
-        
+
         [Required]
-        [MaxLength(250)]
-        public string HowTo { get; set; }
-        
+        public DateTime Date { get; set; }
+
         [Required]
-        public string Line { get; set; } 
-        
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Sum { get; set; }
+
         [Required]
-        public string Platform { get;set; }
+        public string Recipent { get; set; }
+
+        public string Note { get; set; }
+
+        public string AccountNr { get; set; }
+
+        public string TransactionId { get; set; }
     }
 }

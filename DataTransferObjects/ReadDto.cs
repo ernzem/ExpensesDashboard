@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ExpensesDashboard.DataTransferObjects
@@ -5,13 +6,16 @@ namespace ExpensesDashboard.DataTransferObjects
     public class ReadDto
     {
         [Key]
+        [Required]
         public int Id { get; set; }
-        
+
         [Required]
-        [MaxLength(250)]
-        public string HowTo { get; set; }
-        
+        public DateTime Date { get; set; }
+
         [Required]
-        public string Line { get; set; }        
+        public decimal Sum { get; set; }
+
+        [Required]
+        public string Recipent { get; set; }   
     }
 }   
